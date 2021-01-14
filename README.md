@@ -32,7 +32,7 @@ which User will get a valid JSON Web Token. And then allow the user access to th
 
 Q: What is OAuth2 Client Credentials Grant? How to implement it using Spring Boot Security?
 A: The Client Credentials Grant involves machine to machine authentication. In case of Client credentials grant type
-the user has no role to play. As previously stated it is machine to machine communication.
+the user has no role to play. As previously stated it is machine to machine communication. 
 This is typically used by clients to access resources about themselves rather than to access a user's resources.
 
 Q: What is OAuth2 Password Grant? How to implement it using Spring Boot Security?
