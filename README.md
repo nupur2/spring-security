@@ -41,6 +41,7 @@ While doing so it passes the username and password to the client. The client the
 with the authorization server using the provided username, password and also its own clientId and
 clientSecret to get the access token. Using this access token it then gets the required resource from the resource server.
 
+
 <dependency>
     <groupId>org.springframework.security</groupId>
     <artifactId>spring-security-core</artifactId>
@@ -113,3 +114,4 @@ http.addFilter("preAuthentication")
 }
 
 }
+
