@@ -1,86 +1,3 @@
----------------------------------------------------------------------------------
-#<dependency>
- #   <groupId>org.springframework.security</groupId>
-  #  <artifactId>spring-security-core</artifactId>
-   # <version>5.3.3.RELEASE</version>
-#</dependency>
-
-
--------------------------------------------------------------------------------
-
-
-@Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) 
-      throws Exception {
-        auth.inMemoryAuthentication().withUser("user")
-          .password(passwordEncoder().encode("password")).roles("USER");
-    }
-
-   @Override
-   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-      .anyRequest().authenticated()
-      .and().httpBasic();
-}
-
-@Override
-protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-      .anyRequest().authenticated()
-      .and().formLogin()
-      .loginPage("/login").permitAll();
-}
-
-protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-      .antMatchers("/", "/home").access("hasRole('USER')")
-      .antMatchers("/admin/**")
-      .hasRole("ADMIN")
-      .and()
-      // some more method calls
-      .formLogin();
-}
-
-@Autowired
-public void configureGlobal(AuthenticationManagerBuilder auth) 
-  throws Exception {
-    auth.inMemoryAuthentication()
-      .withUser("user").password(passwordEncoder()
-      .encode("password"))
-       .roles("USER")
-      .and()
-      .withUser("admin")
-     .password(passwordEncoder()
-    .encode("password"))
-.roles("USER", "ADMIN");
-}
-
-@Override
-protected void configure(HttpSecurity http){
-http.addFilter("preAuthentication")
-.authorization.
-.antMatchers("*/*").permitAll()
-.antMatchers("*/*").hasAnyRole()
-.and().csrf();
-}
-
-
-}
-
-@Bean
-public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
-}
-
-
-
-
-
 
 # spring-security
 
@@ -124,6 +41,123 @@ A: In case of Password grant type the user triggers the client to get some resou
 While doing so it passes the username and password to the client. The client then communicates
 with the authorization server using the provided username, password and also its own clientId and
 clientSecret to get the access token. Using this access token it then gets the required resource from the resource server.
+
+---------------------------------------------------------------------------------
+#<dependency>
+ #   <groupId>org.springframework.security</groupId>
+  #  <artifactId>spring-security-core</artifactId>
+   # <version>5.3.3.RELEASE</version>
+#</dependency>
+
+
+-------------------------------------------------------------------------------
+
+
+@Configuration
+
+@EnableWebSecurity
+
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) 
+      throws Exception {
+        auth.inMemoryAuthentication().withUser("user")
+          .password(passwordEncoder().encode("password")).roles("USER");
+    }
+
+ 
+   protected void configure(HttpSecurity http) throws Exception {
+   
+    http.authorizeRequests()
+    
+      .anyRequest().authenticated()
+      
+      .and().httpBasic();
+      
+}
+
+protected void configure(HttpSecurity http) throws Exception {
+
+    http.authorizeRequests()
+    
+      .anyRequest().authenticated()
+      
+      .and().formLogin()
+      
+      .loginPage("/login").permitAll();
+      
+}
+
+protected void configure(HttpSecurity http) throws Exception {
+
+    http.authorizeRequests()
+    
+      .antMatchers("/", "/home").access("hasRole('USER')")
+      
+      .antMatchers("/admin/**")
+      
+      .hasRole("ADMIN")
+      
+      .and()
+      
+      // some more method calls
+      .formLogin();
+}
+
+public void configureGlobal(AuthenticationManagerBuilder auth) 
+
+  throws Exception {
+  
+    auth.inMemoryAuthentication()
+    
+      .withUser("user").password(passwordEncoder()
+      
+      .encode("password"))
+      
+       .roles("USER")
+       
+      .and()
+      
+      .withUser("admin")
+      
+     .password(passwordEncoder()
+     
+    .encode("password"))
+    
+.roles("USER", "ADMIN");
+
+}
+
+
+protected void configure(HttpSecurity http){
+
+http.addFilter("preAuthentication")
+
+.authorization.
+
+.antMatchers("*/*").permitAll()
+
+.antMatchers("*/*").hasAnyRole()
+
+.and().csrf();
+
+}
+
+
+@Bean
+
+public PasswordEncoder passwordEncoder() {
+
+    return new BCryptPasswordEncoder();
+    
+}
+
+
+
+
 
 
 
