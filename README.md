@@ -21,8 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           .password(passwordEncoder().encode("password")).roles("USER");
     }
 
-@Override
-protected void configure(HttpSecurity http) throws Exception {
+   @Override
+   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests()
       .anyRequest().authenticated()
       .and().httpBasic();
