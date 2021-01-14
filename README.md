@@ -1,8 +1,12 @@
-<dependency>
-    <groupId>org.springframework.security</groupId>
-    <artifactId>spring-security-core</artifactId>
-    <version>5.3.3.RELEASE</version>
-</dependency>
+---------------------------------------------------------------------------------
+#<dependency>
+ #   <groupId>org.springframework.security</groupId>
+  #  <artifactId>spring-security-core</artifactId>
+   # <version>5.3.3.RELEASE</version>
+#</dependency>
+
+
+-------------------------------------------------------------------------------
 
 
 @Configuration
